@@ -3,7 +3,7 @@
 The script allows to backup and restore XC configurations of HTTP and TCP Load Balancers and their components. The script can be added to the crontab for daily backups:
 ```
 crontab -e
-23 55 * * * /backup/f5_xc_backup_restore.sh backup
+55 23 * * * /backup/f5_xc_backup_restore.sh backup
 ```
 
 ## Usage
