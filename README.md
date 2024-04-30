@@ -1,6 +1,6 @@
 # F5 Distributed Cloud configuration backup and restore
 ## Intro
-The script allows to backup and restore XC configurations of HTTP Load Balancers and its components.
+The script allows to backup and restore XC configurations of HTTP and TCP Load Balancers and its components.
 
 ## Usage
 ### Backup
