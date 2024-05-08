@@ -36,12 +36,12 @@ if [ -z "$namespace" ]; then
 fi
 
 # Script specific directories
-load_balancers_dir="./load_balancers"
-tcp_load_balancers_dir="./tcp_load_balancers"
-origin_pools_dir="./origin_pools"
-health_checks_dir="./health_checks"
-service_policies_dir="./service_policies"
-app_firewalls_dir="./app_firewalls"
+load_balancers_dir="./load_balancers-${namespace}"
+tcp_load_balancers_dir="./tcp_load_balancers-${namespace}"
+origin_pools_dir="./origin_pools-${namespace}"
+health_checks_dir="./health_checks-${namespace}"
+service_policies_dir="./service_policies-${namespace}"
+app_firewalls_dir="./app_firewalls=${namespace}"
 
 # Check if the number of arguments provided is not equal to 1
 if [ "$#" -ne 1 ]; then
