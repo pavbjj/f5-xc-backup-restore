@@ -90,42 +90,42 @@ sleep 1
     echo
     echo "=== Backing up Load Balancer: $load_balancer ==="
     log "=== Backing up Load Balancer: $load_balancer ==="
-    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/http_loadbalancers/$load_balancer > $load_balancers_dir/$load_balancer.json
+    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/http_loadbalancers/$load_balancer | jq 'del(.resource_version)' > $load_balancers_dir/$load_balancer.json
     sleep 0.2
   done
   for tcp_load_balancer in $tcp_load_balancers_list; do
     echo
     echo "=== Backing up TCP Load Balancer: $tcp_load_balancer ==="
     log "=== Backing up TCP Load Balancer: $tcp_load_balancer ==="
-    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/tcp_loadbalancers/$tcp_load_balancer > $tcp_load_balancers_dir/$tcp_load_balancer.json
+    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/tcp_loadbalancers/$tcp_load_balancer | jq 'del(.resource_version)' > $tcp_load_balancers_dir/$tcp_load_balancer.json
     sleep 0.2
   done
   for origin_pool in $origin_pools_list; do
     echo
     echo "=== Backing up Origin Pools: $origin_pool ==="
     log "=== Backing up Origin Pools: $origin_pool ==="
-    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/origin_pools/$origin_pool > $origin_pools_dir/$origin_pool.json
+    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/origin_pools/$origin_pool | jq 'del(.resource_version)' > $origin_pools_dir/$origin_pool.json
     sleep 0.2
   done
   for health_check in $health_checks_list; do
     echo
     echo "=== Backing up Health Checks: $health_check ==="
     log "=== Backing up Health Checks: $health_check ==="
-    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/healthchecks/$health_check > $health_checks_dir/$health_check.json
+    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/healthchecks/$health_check | jq 'del(.resource_version)' > $health_checks_dir/$health_check.json
     sleep 0.2
   done
   for service_policy in $service_policies_list; do
     echo
     echo "=== Backing up Service Policies: $service_policy ==="
     log "=== Backing up Service Policies: $service_policy ==="
-    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/service_policys/$service_policy > $service_policies_dir/$service_policy.json
+    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/service_policys/$service_policy | jq 'del(.resource_version)' > $service_policies_dir/$service_policy.json
     sleep 0.2
   done
   for app_firewall in $app_firewalls_list; do
     echo
     echo "=== Backing up App Firewalls: $app_firewall ==="
     log "=== Backing up App Firewalls: $app_firewall ==="
-    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/app_firewalls/$app_firewall > $app_firewalls_dir/$app_firewall.json
+    curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/app_firewalls/$app_firewall | jq 'del(.resource_version)' > $app_firewalls_dir/$app_firewall.json
     sleep 0.2
   done
 fi
