@@ -133,7 +133,7 @@ fi
 # Main Restore
 if [ "$1" = "restore" ]; then
 # Check if folders contain minimum components to build Load Balancers
-for dir in "$health_checks_dir" "$origin_pools_dir" "$load_balancers_dir" "$tcp_load_balancers_dir"; do
+for dir in "$health_checks_dir" "$origin_pools_dir" "$load_balancers_dir"; do
     if ! compgen -G "$dir/*.json" > /dev/null; then
         echo "!!! FOLDER $dir DOES NOT CONTAINT ANY .json FILES, ABORTING !!!"
         log "!!! FOLDER $dir DOES NOT CONTAINT ANY .json FILES, ABORTING !!!"
