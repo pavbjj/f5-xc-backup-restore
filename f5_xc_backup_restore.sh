@@ -76,8 +76,8 @@ for namespace in $namespaces; do
 
     log "Starting data collection from namespace: $namespace"
     mkdir -p $load_balancers_dir $tcp_load_balancers_dir $origin_pools_dir $health_checks_dir $service_policies_dir $app_firewalls_dir
-    echo "Working directories created successfully."
-    log "Working directories created successfully."
+    echo "Working directories created successfully for namespace: $namespace"
+    log "Working directories created successfully for namespace: $namespace"
 
     load_balancers_list="$(curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/http_loadbalancers | jq -r .[][].name)"
     tcp_load_balancers_list="$(curl -s -X GET -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/tcp_loadbalancers | jq -r .[][].name)"
@@ -122,6 +122,12 @@ for namespace in $namespaces; do
 
     if [ "$1" = "restore" ]; then
         log "=== Starting Restore for namespace: $namespace ==="
+        echo "=== Starting Restore for namespace: $namespace ==="
+        if [ "$3" = "all" ]; then
+        echo "Illegal argument "ALL" for restore. Use specific namespace!"
+        log "Illegal argument "ALL" for restore. Use specific namespace!"
+        exit 1
+        fi
         for dir in "$health_checks_dir" "$origin_pools_dir" "$load_balancers_dir"; do
             if ! compgen -G "$dir/*.json" > /dev/null; then
                 echo "!!! FOLDER $dir DOES NOT CONTAIN ANY .json FILES, ABORTING !!!"
@@ -129,7 +135,7 @@ for namespace in $namespaces; do
                 exit 1
             fi
         done
-
+    
         for f in "$health_checks_dir"/*.json; do
             name=$(jq -r '.metadata.name' "$f")
             log "Restoring Health Check: $name"
@@ -167,5 +173,4 @@ for namespace in $namespaces; do
             curl -s -X POST -H "Authorization: APIToken $api_token" https://$tenant.console.ves.volterra.io/api/config/namespaces/$namespace/http_loadbalancers -d "@$f"
         done
     fi
-
 done
