@@ -30,6 +30,13 @@ if [ -z "$tenant" ]; then
     exit 1
 fi
 
+# Check if the namespace variable is set
+if [ -z "$namespace_provider" ]; then
+    echo "Error: Tenant is not set."
+    log "Error: Tenant is not set."
+    exit 1
+fi
+
 # Check if the number of arguments provided is not equal to 4
 if [ "$#" -ne 4 ]; then
     echo "Usage: $0 [backup/restore xc-tenant namespace APITOKEN]"
