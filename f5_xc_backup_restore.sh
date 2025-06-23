@@ -16,35 +16,14 @@ log() {
     echo "$(date +"%Y-%m-%d %T") $1" >> "$log_file"
 }
 
-# Check if the API token variable is set
-if [ -z "$api_token" ]; then
-    echo "Error: API token is not set."
-    log "Error: API token is not set."
-    exit 1
-fi
-
-# Check if the tenant variable is set
-if [ -z "$tenant" ]; then
-    echo "Error: Tenant is not set."
-    log "Error: Tenant is not set."
-    exit 1
-fi
-
-# Check if the namespace variable is set
-if [ -z "$namespace_provider" ]; then
-    echo "Error: Tenant is not set."
-    log "Error: Tenant is not set."
-    exit 1
-fi
-
-# Check if the number of arguments provided is not equal to 4
+# Check if the number of arguments provided is equal to 4
 if [ "$#" -ne 4 ]; then
     echo "Usage: $0 [backup/restore xc-tenant namespace APITOKEN]"
     log "Usage: $0 [backup/restore xc-tenant namespace APITOKEN]"
     exit 1
 fi
 
-# Check if the argument provided is either "backup" or "restore"
+# Check if the first argument provided is either "backup" or "restore"
 if [ "$1" != "backup" ] && [ "$1" != "restore" ]; then
     echo "Error: Invalid argument. Please provide 'backup' or 'restore'."
     log "Error: Invalid argument. Please provide 'backup' or 'restore'."
